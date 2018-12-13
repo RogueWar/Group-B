@@ -474,14 +474,14 @@ END$$
 DELIMITER ;
 CALL addTrainee('Buentipo','Anthony','C', 50, 0);
 
-#Trainee Read
+#Trainee Retreive/Read
 DELIMITER $$
 create procedure getTrainees()
 begin
     select * from trainees;
 end$$
 DELIMITER ;
-call gettrainees();
+call getTrainees();
     
     
 #Update Trainee
@@ -517,7 +517,7 @@ END$$
 DELIMITER ;
 CALL AddEmployee('Cervantes','Yugo','C', 22, '', 0, 0);
 
-#Employee Read
+#Employee Retreive/Read
 DELIMITER $$
 create procedure getEmployees()
 begin
@@ -559,9 +559,7 @@ END$$
 DELIMITER ;
 call addStrengths(60,70, 65, 34, 79, 54, 67, 56, 0);
 
-
-
-#Strengths Read
+#Strengths Retreive/Read
 DELIMITER $$
 create procedure getStrengths()
 begin
@@ -616,7 +614,7 @@ END$$
 DELIMITER ;
 CALL addAttend(3,3);
 
-#Attendance Read
+#Attendance Retreive/Read
 DELIMITER $$
 create procedure getAttend()
 begin
@@ -650,7 +648,18 @@ call deleteAttend(1);
 call getAttend();
 
 #1. GET THE AVERAGE SCORE OF THE TRAINEES IN EACH OF THE STRENGTH
+#Trainee Average
+DELIMITER $$
+create procedure getStrengthAverage()
+begin
+update strengths set average=
+(select sum(computer_skills + technical_ability + communication_skills + critical_thinking + punctuality + creativity + determination + versatility)/8);
+end $$
+delimiter ;
+call getStrengths();
+call getStrengthAverage();
 
+#Trainee Average together with Trainee names
 DELIMITER $$
 create procedure getTraineeAverage()
 begin
@@ -705,6 +714,13 @@ BEGIN
 END$$
 DELIMITER ;
 call  getEmployeeTraineeAchieveAverage (60, @employee);
+
+
+
+
+
+
+
 
 
 
